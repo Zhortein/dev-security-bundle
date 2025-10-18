@@ -23,7 +23,7 @@ class Kernel extends BaseKernel
     {
         return [
             new FrameworkBundle(),
-            new ZhorteinOvhApiBundle(),
+            new ZhorteinDevSecurityBundle(),
         ];
     }
 
