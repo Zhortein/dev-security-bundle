@@ -44,7 +44,6 @@ final class RestrictedAccessSubscriberTest extends TestCase
 
         // Should not throw
         $subscriber->onKernelController($event);
-        self::assertTrue(true);
     }
 
     public function testAllowedIpCanAccessRestrictedRoute(): void
@@ -59,7 +58,6 @@ final class RestrictedAccessSubscriberTest extends TestCase
 
         // Should not throw
         $subscriber->onKernelController($event);
-        self::assertTrue(true);
     }
 
     public function testDisallowedIpIsBlockedFromRestrictedRoute(): void
@@ -87,7 +85,6 @@ final class RestrictedAccessSubscriberTest extends TestCase
         $event = new ControllerEvent($kernel, $controller, $request, 1); // MAIN_REQUEST = 1
 
         $subscriber->onKernelController($event);
-        self::assertTrue(true);
     }
 
     public function testArrayControllerNotationIsHandled(): void
@@ -114,7 +111,6 @@ final class RestrictedAccessSubscriberTest extends TestCase
 
         // Should not throw
         $subscriber->onKernelController($event);
-        self::assertTrue(true);
     }
 
     public function testAccessDeniedMessageIsAccurate(): void
