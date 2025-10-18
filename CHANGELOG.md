@@ -14,12 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Create `tests/Integration` directory to fix PHPUnit test discovery
 - Add `expectNotToPerformAssertions()` to tests validating "no exception thrown" behavior
 - Update PHPUnit XSD schema to 12.0 for PHPUnit 12.x compatibility
-- Move PHPUnit `<report>` element outside of `<coverage>` for proper schema structure
+- Replace deprecated `<coverage>` element with `<source>` for code coverage filtering
+- Use `includeUncoveredFiles` attribute instead of `processUncoveredFiles` for PHPUnit 12 schema
 - Configure PHPUnit code coverage report format (clover) to fix coverage warnings
 - Fixes PHPStan level max validation errors
 - Fixes PHPUnit test directory not found error
 - Fixes PHPUnit risky test warnings for tests without assertions
-- Fixes PHPUnit code coverage filter warning and schema validation errors
+- Fixes PHPUnit XML schema validation errors and code coverage configuration
 
 ## [1.0.0] - 2024-12-19
 
