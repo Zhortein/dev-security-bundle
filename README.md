@@ -2,6 +2,12 @@
 
 > 🔒 Secure your Symfony dev environment without losing comfort.
 
+[![CI](https://github.com/zhortein/dev-security-bundle/actions/workflows/ci.yml/badge.svg)](https://github.com/zhortein/dev-security-bundle/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/zhortein/dev-security-bundle/branch/develop/graph/badge.svg)](https://codecov.io/gh/zhortein/dev-security-bundle)
+[![PHP Version](https://img.shields.io/badge/PHP->=8.3-blue.svg)](https://php.net)
+[![Symfony Version](https://img.shields.io/badge/Symfony-7.0+-orange.svg)](https://symfony.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 This bundle protects Symfony development environments from accidental exposure of sensitive data.  
 It restricts access to the **Web Debug Toolbar**, **Profiler**, and other **debug routes** to a whitelist of IPs or reverse hostnames.
 

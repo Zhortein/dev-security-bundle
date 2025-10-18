@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.0.0] - 2024-12-19
 
 ### Added
 - Initial release of Zhortein Dev Security Bundle
@@ -24,6 +24,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Protects sensitive debugging tools from unauthorized access
 - Prevents accidental exposure of sensitive information in development environments
 - Audit trail logging with configurable verbosity for security monitoring
+
+### Infrastructure
+- GitHub Actions CI/CD workflow with automated testing and static analysis
+- Multi-version PHP (8.3, 8.4) test matrix
+- Code coverage reporting with Codecov integration
+- Security audit scanning with composer audit
 
 ## [1.0.0-alpha] - Initial Release
 
