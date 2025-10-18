@@ -16,15 +16,17 @@
         </testsuite>
     </testsuites>
 
-    <coverage processUncoveredFiles="true">
+    <source>
         <include>
             <directory suffix=".php">src</directory>
         </include>
-    </coverage>
+    </source>
 
-    <report>
-        <clover outputFile="coverage.xml"/>
-    </report>
+    <coverage includeUncoveredFiles="true">
+        <report>
+            <clover outputFile="coverage.xml"/>
+        </report>
+    </coverage>
 
     <php>
         <ini name="display_errors" value="1"/>
