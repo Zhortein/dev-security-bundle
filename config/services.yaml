@@ -1,0 +1,7 @@
+services:
+    Zhortein\DevSecurityBundle\EventSubscriber\ProfilerAccessSubscriber:
+        arguments:
+            $allowedIps: '%zhortein_dev_security.allowed_ips%'
+            $allowedHostPatterns: '%zhortein_dev_security.allowed_hosts%'
+            $logBlockedAttempts: '%zhortein_dev_security.log_blocked_attempts%'
+        tags: ['kernel.event_subscriber']
