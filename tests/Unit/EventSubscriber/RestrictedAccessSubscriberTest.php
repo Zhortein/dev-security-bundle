@@ -34,6 +34,8 @@ final class RestrictedAccessSubscriberTest extends TestCase
 
     public function testControllerWithoutAttributeIsAllowed(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $subscriber = new RestrictedAccessSubscriber(['127.0.0.1'], [], false, $this->logger);
         $request = Request::create('/');
         $request->server->set('REMOTE_ADDR', '10.0.0.1');
@@ -48,6 +50,8 @@ final class RestrictedAccessSubscriberTest extends TestCase
 
     public function testAllowedIpCanAccessRestrictedRoute(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $subscriber = new RestrictedAccessSubscriber(['127.0.0.1'], [], false, $this->logger);
         $request = Request::create('/');
         $request->server->set('REMOTE_ADDR', '127.0.0.1');
@@ -76,6 +80,8 @@ final class RestrictedAccessSubscriberTest extends TestCase
 
     public function testCidrRangeAllowsAccess(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $subscriber = new RestrictedAccessSubscriber(['10.0.0.0/8'], [], false, $this->logger);
         $request = Request::create('/');
         $request->server->set('REMOTE_ADDR', '10.100.50.5');
@@ -103,6 +109,8 @@ final class RestrictedAccessSubscriberTest extends TestCase
 
     public function testCallableWithoutObjectIsIgnored(): void
     {
+        $this->expectNotToPerformAssertions();
+
         $subscriber = new RestrictedAccessSubscriber(['127.0.0.1'], [], false, $this->logger);
         $request = Request::create('/');
 
