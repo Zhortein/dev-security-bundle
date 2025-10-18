@@ -27,7 +27,7 @@ class ZhorteinDevSecurityBundleExtension extends Extension
             return;
         }
 
-        // Injectglobal parameters
+        // Inject global parameters
         $container->setParameter('zhortein_dev_security.allowed_ips', $config['allowed_ips']);
         $container->setParameter('zhortein_dev_security.allowed_hosts', $config['allowed_hosts']);
         $container->setParameter('zhortein_dev_security.log_blocked_attempts', $config['log_blocked_attempts']);
