@@ -1,0 +1,17 @@
+framework:
+  test: true
+  session:
+    storage_factory_id: session.storage.factory.mock_file
+  profiler:
+    collect: false
+
+zhortein_dev_security:
+  enabled: true
+  allowed_ips:
+    - '127.0.0.1'
+    - '::1'
+  allowed_host_patterns: []
+  log_blocked_attempts: false
+
+services:
+  Psr\Log\LoggerInterface: '@logger'
