@@ -10,14 +10,25 @@ use Symfony\Component\HttpFoundation\IpUtils;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-final class ProfilerAccessSubscriber implements EventSubscriberInterface
+/**
+ * Restricts access to Symfony Profiler and Web Debug Toolbar based on whitelist configuration.
+ *
+ * This subscriber disables the profiler and Web Debug Toolbar for requests from
+ * unauthorized IPs or hostnames, protecting sensitive debugging information.
+ */
+final readonly class ProfilerAccessSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @param array<string> $allowedIps          List of allowed IPs or CIDR ranges
+     * @param array<string> $allowedHostPatterns List of allowed hostname patterns
+     */
     public function __construct(
-        private readonly array $allowedIps,
-        private readonly array $allowedHostPatterns,
-        private readonly bool $logBlockedAttempts,
-        private readonly LoggerInterface $logger
-    ) {}
+        private array $allowedIps,
+        private array $allowedHostPatterns,
+        private bool $logBlockedAttempts,
+        private LoggerInterface $logger,
+    ) {
+    }
 
     public static function getSubscribedEvents(): array
     {
@@ -35,14 +46,14 @@ final class ProfilerAccessSubscriber implements EventSubscriberInterface
         $request = $event->getRequest();
         $clientIp = $request->getClientIp() ?? 'unknown';
 
-        // Autorisation directe (IP/CIDR)
+        // Direct IP/CIDR authorization
         foreach ($this->allowedIps as $allowed) {
             if (IpUtils::checkIp($clientIp, $allowed)) {
                 return;
             }
         }
 
-        // Reverse DNS autorisé ?
+        // Reverse DNS check
         $reverse = @gethostbyaddr($clientIp) ?: null;
         if ($reverse) {
             foreach ($this->allowedHostPatterns as $pattern) {
@@ -52,7 +63,7 @@ final class ProfilerAccessSubscriber implements EventSubscriberInterface
             }
         }
 
-        // Bloqué : désactive profiler et toolbar
+        // Blocked: disable profiler and web debug toolbar
         $request->attributes->set('_profiler', false);
         $request->attributes->set('_wdt', false);
 

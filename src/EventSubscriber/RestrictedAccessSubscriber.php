@@ -12,14 +12,25 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Zhortein\DevSecurityBundle\Attribute\RestrictedToDevWhitelist;
 
-final class RestrictedAccessSubscriber implements EventSubscriberInterface
+/**
+ * Restricts access to routes marked with RestrictedToDevWhitelist attribute.
+ *
+ * This subscriber checks if a controller or action is marked with the RestrictedToDevWhitelist
+ * attribute and enforces IP/hostname whitelist restrictions.
+ */
+final readonly class RestrictedAccessSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @param array<string> $allowedIps          List of allowed IPs or CIDR ranges
+     * @param array<string> $allowedHostPatterns List of allowed hostname patterns
+     */
     public function __construct(
-        private readonly array $allowedIps,
-        private readonly array $allowedHostPatterns,
-        private readonly bool $logBlockedAttempts,
-        private readonly LoggerInterface $logger
-    ) {}
+        private array $allowedIps,
+        private array $allowedHostPatterns,
+        private bool $logBlockedAttempts,
+        private LoggerInterface $logger,
+    ) {
+    }
 
     public static function getSubscribedEvents(): array
     {
@@ -35,11 +46,21 @@ final class RestrictedAccessSubscriber implements EventSubscriberInterface
             $controller = $controller[0];
         }
 
+        if (!is_object($controller)) {
+            return;
+        }
+
         $reflection = new \ReflectionClass($controller);
-        $attributes = array_merge(
-            $reflection->getAttributes(RestrictedToDevWhitelist::class),
-            $event->getControllerAttributes(RestrictedToDevWhitelist::class)
-        );
+        $classAttributes = $reflection->getAttributes(RestrictedToDevWhitelist::class);
+        $methodAttributes = [];
+
+        // Get method attributes if controller is callable
+        if (method_exists($controller, '__invoke')) {
+            $method = $reflection->getMethod('__invoke');
+            $methodAttributes = $method->getAttributes(RestrictedToDevWhitelist::class);
+        }
+
+        $attributes = array_merge($classAttributes, $methodAttributes);
 
         if (empty($attributes)) {
             return;
@@ -48,7 +69,7 @@ final class RestrictedAccessSubscriber implements EventSubscriberInterface
         $request = $event->getRequest();
         $clientIp = $request->getClientIp() ?? 'unknown';
 
-        // Vérification IP et reverse
+        // Check IP and reverse DNS
         foreach ($this->allowedIps as $allowed) {
             if (IpUtils::checkIp($clientIp, $allowed)) {
                 return;
@@ -64,7 +85,7 @@ final class RestrictedAccessSubscriber implements EventSubscriberInterface
             }
         }
 
-        // Refus
+        // Access denied
         if ($this->logBlockedAttempts) {
             $this->logger->warning(sprintf(
                 'Restricted route access denied for %s (reverse: %s)',
