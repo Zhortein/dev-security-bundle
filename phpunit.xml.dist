@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.0/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/12.0/phpunit.xsd"
          bootstrap="tests/bootstrap.php"
          executionOrder="defects"
          beStrictAboutOutputDuringTests="true"
@@ -20,10 +20,11 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
-        <report>
-            <clover outputFile="coverage.xml"/>
-        </report>
     </coverage>
+
+    <report>
+        <clover outputFile="coverage.xml"/>
+    </report>
 
     <php>
         <ini name="display_errors" value="1"/>
