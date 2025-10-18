@@ -13,9 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove tautologous `assertTrue(true)` assertions that trigger PHPStan warnings
 - Create `tests/Integration` directory to fix PHPUnit test discovery
 - Add `expectNotToPerformAssertions()` to tests validating "no exception thrown" behavior
+- Configure PHPUnit code coverage report format (clover) to fix coverage warnings
 - Fixes PHPStan level max validation errors
 - Fixes PHPUnit test directory not found error
 - Fixes PHPUnit risky test warnings for tests without assertions
+- Fixes PHPUnit code coverage configuration warnings
 
 ## [1.0.0] - 2024-12-19
 
