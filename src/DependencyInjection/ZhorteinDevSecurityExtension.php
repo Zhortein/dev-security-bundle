@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 /**
  * Loads and manages bundle configuration.
  */
-class ZhorteinDevSecurityBundleExtension extends Extension
+class ZhorteinDevSecurityExtension extends Extension
 {
     /**
      * @param array<string, mixed> $configs
