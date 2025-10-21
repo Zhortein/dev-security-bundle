@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2] - 2024-12-19
+
+### Fixed
+- Auto-load extension by following Symfony naming convention (renamed `ZhorteinDevSecurityBundleExtension` to `ZhorteinDevSecurityExtension`)
+- Bundle configuration now loads automatically without requiring explicit `getContainerExtension()` override
+
 ## [1.0.1] - 2024-12-19
 
 ### Fixed
