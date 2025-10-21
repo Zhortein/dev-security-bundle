@@ -7,13 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.2] - 2024-12-19
+## [1.0.2] - 2025-10-20
 
 ### Fixed
 - Auto-load extension by following Symfony naming convention (renamed `ZhorteinDevSecurityBundleExtension` to `ZhorteinDevSecurityExtension`)
 - Bundle configuration now loads automatically without requiring explicit `getContainerExtension()` override
 
-## [1.0.1] - 2024-12-19
+## [1.0.1] - 2025-10-18
 
 ### Fixed
 - Remove tautologous `assertTrue(true)` assertions that trigger PHPStan warnings
@@ -28,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixes PHPUnit risky test warnings for tests without assertions
 - Fixes PHPUnit XML schema validation errors and code coverage configuration
 
-## [1.0.0] - 2024-12-19
+## [1.0.0] - 2025-10-17
 
 ### Added
 - Initial release of Zhortein Dev Security Bundle
